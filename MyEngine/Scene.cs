@@ -7,13 +7,11 @@ namespace MyEngine
     struct Scene
     {
         public List<GameObject> gameObjects;
-        public RenderTarget target;
         public Camera camera;
 
-        public Scene(List<GameObject> gameObjects, RenderTarget target, Camera camera)
+        public Scene(List<GameObject> gameObjects, Camera camera)
         {
             this.gameObjects = gameObjects;
-            this.target = target;
             this.camera = camera;
         }
 
@@ -30,7 +28,7 @@ namespace MyEngine
 
         public void Render()
         {
-            camera.Render(gameObjects, target);
+            camera.Render(gameObjects);
         }
 
         private void CheckGameObjectsToDestroy()

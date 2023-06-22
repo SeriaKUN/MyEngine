@@ -6,11 +6,6 @@
 
         public bool continuePlaying = true;
 
-        public Game(State state)
-        {
-            this.state = state;
-        }
-
         public void Run()
         {
             SetStartingState();
