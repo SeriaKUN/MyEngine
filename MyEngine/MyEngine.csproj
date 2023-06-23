@@ -10,13 +10,9 @@
     <RepositoryUrl></RepositoryUrl>
     <RepositoryType></RepositoryType>
     <PackageId>$(AssemblyName)</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.2.2</Version>
     <Authors>Serhii</Authors>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Input\" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="SFML.Net" Version="2.5.0" />
