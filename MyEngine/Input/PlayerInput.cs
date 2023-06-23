@@ -21,6 +21,9 @@ namespace MyEngine.Input
         public bool IsKeyPressed(string keyBindName)
             => inputKeys[keyBindName].isPressed;
 
+        public bool WasKeyPressed(string keyBindName)
+            => inputKeys[keyBindName].wasPressed;
+
         public void SetVector(string vectorName, Vector2f vector)
             => inputVectors[vectorName] = vector;
 
@@ -39,7 +42,10 @@ namespace MyEngine.Input
         public void UpdateKeyInput()
         {
             foreach (KeyBind keyBind in inputKeys.Values)
+            {
+                keyBind.wasPressed = keyBind.isPressed;
                 keyBind.isPressed = Keyboard.IsKeyPressed(keyBind.key);
+            }
         }
     }
 }

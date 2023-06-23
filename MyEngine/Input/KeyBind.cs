@@ -6,6 +6,7 @@ namespace MyEngine.Input
     {
         public Keyboard.Key key;
         public bool isPressed = false;
+        public bool wasPressed = false;
 
         public KeyBind(Keyboard.Key key)
         {
