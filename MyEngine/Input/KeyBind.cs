@@ -2,7 +2,7 @@
 
 namespace MyEngine.Input
 {
-    class KeyBind
+    public class KeyBind
     {
         public Keyboard.Key key;
         public bool isPressed = false;

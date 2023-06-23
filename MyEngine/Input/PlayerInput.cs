@@ -3,7 +3,7 @@ using SFML.System;
 
 namespace MyEngine.Input
 {
-    class PlayerInput
+    public class PlayerInput
     {
         private Dictionary<string, KeyBind> inputKeys = new Dictionary<string, KeyBind>();
 
