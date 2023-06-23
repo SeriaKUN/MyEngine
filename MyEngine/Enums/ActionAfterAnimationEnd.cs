@@ -1,6 +1,6 @@
 ﻿namespace MyEngine.Enums
 {
-    enum ActionAfterAnimationEnd 
+    public enum ActionAfterAnimationEnd 
     {
         StopRenderingAnimation,
         PlayInReverse,

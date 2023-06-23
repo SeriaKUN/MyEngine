@@ -4,7 +4,7 @@ using SFML.Graphics;
 
 namespace MyEngine
 {
-    struct Scene
+    public struct Scene
     {
         public List<GameObject> gameObjects;
         public Camera camera;

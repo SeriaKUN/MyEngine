@@ -2,9 +2,9 @@
 
 namespace MyEngine.GameObjects
 {
-    public abstract class GameObject
+    public class GameObject
     {
-        public bool toDestroy;
+        public bool toDestroy = false;
 
         public void TryUpdate()
         {

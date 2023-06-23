@@ -3,7 +3,7 @@ using SFML.Graphics;
 
 namespace MyEngine.Render
 {
-    class MyEngineSprite
+    public class MyEngineSprite
     {
         public Sprite sprite = new Sprite();
 
@@ -47,11 +47,14 @@ namespace MyEngine.Render
 
         public static MyEngineSprite newSprite(Vector2f position, string path, bool toRender = true)
         {
-            FileStream stream = new FileStream(path, FileMode.Open);
+            MyEngineSprite sprite;
 
-            MyEngineSprite sprite = new MyEngineSprite(position, new Texture(stream), toRender);
+            using (FileStream stream = new FileStream(path, FileMode.Open))
+            {
+                sprite = new MyEngineSprite(position, new Texture(stream), toRender);
 
-            stream.Close();
+                stream.Close();
+            }
 
             return sprite;
         }

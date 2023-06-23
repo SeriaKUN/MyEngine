@@ -4,19 +4,26 @@ using MyEngine.GameObjects;
 
 namespace MyEngine.Render
 {
-    class Camera
+    public class Camera
     {
-        public FloatRect rectangle = new FloatRect();
+        public FloatRect rectangle;
         public Vector2f center;
         public Vector2f size;
         public RenderTarget renderTarget;
+        public Color backGroundColor;
 
-        public Camera(FloatRect rectangle, Vector2f center, Vector2f size, RenderTarget renderTarget)
+        public Camera(Vector2f center, Vector2f size, RenderTarget renderTarget, Color backGroundColor)
         {
-            this.rectangle = rectangle;
             this.center = center;
             this.size = size;
             this.renderTarget = renderTarget;
+            this.backGroundColor = backGroundColor;
+
+            rectangle = new FloatRect();
+            rectangle.Left = center.X - size.X * 0.5f;
+            rectangle.Top = center.Y - size.Y * 0.5f;
+            rectangle.Width = size.X;
+            rectangle.Height = size.Y;
         }
 
         public void Render(List<GameObject> gameObjects)

@@ -4,7 +4,7 @@ using MyEngine.Enums;
 
 namespace MyEngine.Render
 {
-    class Animation : MyEngineSprite
+    public class Animation : MyEngineSprite
     {
         Texture[] frames;
 
@@ -52,11 +52,12 @@ namespace MyEngine.Render
 
             for (int i = 0; i < framesPaths.Length; i++)
             {
-                FileStream stream = new FileStream(framesPaths[i], FileMode.Open);
+                using (FileStream stream = new FileStream(framesPaths[i], FileMode.Open))
+                {
+                    frames[i] = new Texture(stream);
 
-                frames[i] = new Texture(stream);
-
-                stream.Close();
+                    stream.Close();
+                }
             }
 
             Animation animatedSprite = new Animation(frames, position, animationPlaySpeed, (int)frameToRender, paused, toRender);

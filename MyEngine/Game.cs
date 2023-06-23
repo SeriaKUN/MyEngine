@@ -1,8 +1,12 @@
-﻿namespace MyEngine
+﻿using SFML.Graphics;
+using SFML.Window;
+
+namespace MyEngine
 {
     public abstract class Game
     {
         public State state;
+        public static RenderWindow window = new RenderWindow(new VideoMode(750, 750), "game");
 
         public bool continuePlaying = true;
 
