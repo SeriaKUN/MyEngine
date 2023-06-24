@@ -6,6 +6,8 @@ namespace MyEngine.GameObjects
     {
         public bool toDestroy = false;
 
+        public Action OnDestroy;
+
         public void TryUpdate()
         {
             if (this is IUpdateable updateable)

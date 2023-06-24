@@ -4,7 +4,7 @@ using SFML.Graphics;
 
 namespace MyEngine
 {
-    public struct Scene
+    public class Scene
     {
         public List<GameObject> gameObjects;
         public Camera camera;
@@ -29,6 +29,7 @@ namespace MyEngine
         public void Render()
         {
             camera.Render(gameObjects);
+            Game.window.Display();
         }
 
         private void CheckGameObjectsToDestroy()
@@ -38,6 +39,7 @@ namespace MyEngine
                 GameObject gameObject = gameObjects[i];
                 if (gameObject.toDestroy)
                 {
+                    gameObject.OnDestroy?.Invoke();
                     gameObjects.RemoveAt(i);
                     i--;
                 }
