@@ -24,6 +24,18 @@ namespace MyEngine.Input
         public bool WasKeyPressed(string keyBindName)
             => inputKeys[keyBindName].wasPressed;
 
+        public bool StartedPressing(string keyBindName)
+        {
+            KeyBind keyBind = inputKeys[keyBindName];
+            return keyBind.isPressed && !keyBind.wasPressed;
+        }
+
+        public bool StoppedPressing(string keyBindName)
+        {
+            KeyBind keyBind = inputKeys[keyBindName];
+            return !keyBind.isPressed && keyBind.wasPressed;
+        }
+
         public void SetVector(string vectorName, Vector2f vector)
             => inputVectors[vectorName] = vector;
 
@@ -33,11 +45,17 @@ namespace MyEngine.Input
         public void SetKeyPress(string keyBindName, bool isPressed)
             => inputKeys[keyBindName].isPressed = isPressed;
 
-        public void AddBinding(string name, Keyboard.Key key)
-            => inputKeys.Add(name, new KeyBind(key));
+        public PlayerInput AddBinding(string name, Keyboard.Key key)
+        {
+            inputKeys.Add(name, new KeyBind(key));
+            return this;
+        }
 
-        public void AddVector2(string name)
-            => inputVectors.Add(name, new Vector2f());
+        public PlayerInput AddVector2(string name)
+        {
+            inputVectors.Add(name, new Vector2f());
+            return this;
+        }
 
         public void UpdateKeyInput()
         {

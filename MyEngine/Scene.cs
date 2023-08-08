@@ -1,6 +1,5 @@
-﻿using MyEngine.GameObjects;
+﻿using MyEngine.Objects.GameObjects;
 using MyEngine.Render;
-using SFML.Graphics;
 
 namespace MyEngine
 {
@@ -30,6 +29,12 @@ namespace MyEngine
         {
             camera.Render(gameObjects);
             Game.window.Display();
+        }
+
+        public void Input()
+        {
+            for (int i = 0; i < gameObjects.Count; i++)
+                gameObjects[i].TryUpdateInput();
         }
 
         private void CheckGameObjectsToDestroy()

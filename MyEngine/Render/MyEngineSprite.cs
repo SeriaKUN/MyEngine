@@ -26,7 +26,7 @@ namespace MyEngine.Render
         public int Height
             => (int)sprite.Texture.Size.Y;
 
-        public MyEngineSprite(Vector2f position, Texture texture, bool toRender = true)
+        public MyEngineSprite(Texture texture, Vector2f position = new Vector2f(), bool toRender = true)
         {
             this.position = position;
             sprite.Texture = texture;
@@ -51,11 +51,10 @@ namespace MyEngine.Render
 
             using (FileStream stream = new FileStream(path, FileMode.Open))
             {
-                sprite = new MyEngineSprite(position, new Texture(stream), toRender);
+                sprite = new MyEngineSprite(new Texture(stream), position, toRender);
 
                 stream.Close();
             }
-
             return sprite;
         }
 
@@ -73,7 +72,7 @@ namespace MyEngine.Render
 
         public void Render(Camera camera)
         {
-            SpritePosition = position - new Vector2f(Width * 0.5f, Height * 0.5f) - camera.center + new Vector2f(camera.size.X * 0.5f, camera.size.Y * 0.5f);
+            SpritePosition = position - new Vector2f(Width * 0.5f, Height * 0.5f) - camera.Center + (camera.Size * 0.5f);
             camera.renderTarget.Draw(sprite);
         }
     }

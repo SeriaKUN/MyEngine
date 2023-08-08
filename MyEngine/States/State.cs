@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MyEngine
+namespace MyEngine.States
 {
     public abstract class State
     {
@@ -20,15 +20,19 @@ namespace MyEngine
         {
 
         }
+
         public abstract void Update();
+        
         public abstract void Render();
+
         public abstract void Input();
+
         public void Timing()
         {
             if (DateTime.Now.Ticks - lastTimingTick < ticksBetweenFrames)
             {
                 int timeToSleep = (int)((ticksBetweenFrames - (DateTime.Now.Ticks - lastTimingTick)) / TimeSpan.TicksPerMillisecond);
-                System.Threading.Thread.Sleep(Math.Abs(timeToSleep));
+                Thread.Sleep(Math.Abs(timeToSleep));
             }
             lastTimingTick = DateTime.Now.Ticks;
         }

@@ -4,9 +4,10 @@ using MyEngine.Enums;
 
 namespace MyEngine.Render
 {
-    public class Animation : MyEngineSprite
+    public class Animator
     {
         Texture[] frames;
+        MyEngineSprite sprite;
 
         public float frameToRender = 0;
         public bool paused = false;
@@ -17,36 +18,33 @@ namespace MyEngine.Render
         public bool isLastFrame
             => ((int)frameToRender == frames.Length - 1 && !isReverse) || ((int)frameToRender == 0 && isReverse);
 
-        public Animation(Texture[] frames, Vector2f position, float animationPlaySpeed = 1, int frameToRender = 0, bool paused = false, bool toRender = true, bool isReverse = false)
+        public Animator(Texture[] frames, MyEngineSprite sprite, float animationPlaySpeed = 1, float frameToRender = 0, bool paused = false, bool isReverse = false)
         {
             this.frames = frames;
             this.frameToRender = frameToRender;
             this.paused = paused;
-            this.position = position;
-            this.sprite = new Sprite(frames[frameToRender]);
-            this.toRender = toRender;
+            this.sprite = sprite;
+            sprite.sprite.Texture = frames[(int)frameToRender];
             this.isReverse = isReverse;
             this.animationPlaySpeed = animationPlaySpeed;
         }
 
-        public Animation(Animation animatedSprite)
+        public Animator(Animator animator)
         {
-            frames = new Texture[animatedSprite.frames.Length];
-            for (int i = 0; i < animatedSprite.frames.Length; i++)
+            frames = new Texture[animator.frames.Length];
+            for (int i = 0; i < animator.frames.Length; i++)
             {
-                frames[i] = new Texture(animatedSprite.frames[i]);
+                frames[i] = new Texture(animator.frames[i]);
             }
-            frameToRender = animatedSprite.frameToRender;
-            paused = animatedSprite.paused;
-            sprite = new Sprite(animatedSprite.sprite);
-            position = animatedSprite.position;
-            toRender = animatedSprite.toRender;
-            animationPlaySpeed = animatedSprite.animationPlaySpeed;
-            actionAfterAnimationEnd = animatedSprite.actionAfterAnimationEnd;
-            isReverse = animatedSprite.isReverse;
+            frameToRender = animator.frameToRender;
+            paused = animator.paused;
+            sprite = new MyEngineSprite(animator.sprite);
+            animationPlaySpeed = animator.animationPlaySpeed;
+            actionAfterAnimationEnd = animator.actionAfterAnimationEnd;
+            isReverse = animator.isReverse;
         }
 
-        public static Animation newAnimation(string[] framesPaths, float animationPlaySpeed = 1, bool toRender = true, Vector2f position = new Vector2f(), float frameToRender = 0, bool paused = false)
+        public static Animator newAnimation(string[] framesPaths, float animationPlaySpeed = 1, bool toRender = true, Vector2f position = new Vector2f(), float frameToRender = 0, bool paused = false, bool isReverse = false)
         {
             Texture[] frames = new Texture[framesPaths.Length];
 
@@ -60,23 +58,23 @@ namespace MyEngine.Render
                 }
             }
 
-            Animation animatedSprite = new Animation(frames, position, animationPlaySpeed, (int)frameToRender, paused, toRender);
+            Animator animatedSprite = new Animator(frames, new MyEngineSprite(frames[(int)frameToRender], position, toRender), animationPlaySpeed, frameToRender, paused, isReverse);
             return animatedSprite;
         }
 
-        public override void TryRender(Camera camera)
+        public void TryRender(Camera camera)
         {
             if (frameToRender < frames.Length && frameToRender >= 0)
-                sprite.Texture = frames[(int)frameToRender];
+                sprite.sprite.Texture = frames[(int)frameToRender];
 
-            base.TryRender(camera);
+            sprite.TryRender(camera);
 
             if (isLastFrame)
             {
                 switch (actionAfterAnimationEnd)
                 {
                     case ActionAfterAnimationEnd.StopRenderingAnimation:
-                        toRender = false;
+                        sprite.toRender = false;
                         break;
 
                     case ActionAfterAnimationEnd.PlayInReverse:
@@ -99,7 +97,7 @@ namespace MyEngine.Render
         public void Start()
         {
             frameToRender = 0;
-            toRender = true;
+            sprite.toRender = true;
             paused = false;
         }
     }

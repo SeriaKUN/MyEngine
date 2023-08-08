@@ -1,5 +1,4 @@
-﻿
-namespace MyEngine.GameObjects.Interfaces
+﻿namespace MyEngine.Objects.Interfaces
 {
     public interface IRenderable
     {

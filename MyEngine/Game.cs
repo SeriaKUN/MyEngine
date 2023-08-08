@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using MyEngine.States;
+using SFML.Graphics;
 using SFML.Window;
 
 namespace MyEngine
@@ -29,5 +30,6 @@ namespace MyEngine
         }
 
         protected abstract void SetStartingState();
+
     }
 }
