@@ -1,4 +1,5 @@
 ﻿using MyEngine.Objects.Interfaces;
+using MyEngine.Objects.UI;
 using SFML.Graphics;
 
 namespace MyEngine.Objects.UI
@@ -12,9 +13,9 @@ namespace MyEngine.Objects.UI
             this.text = text;
         }
 
-        public static TextLabel NewTextLabel(string text)
+        public static TextLabel NewTextLabel(string text, string fontPath)
         {
-            Font font = new Font("C:\\Users\\Kudlaty\\GIT things\\MyEngine\\MyEngine\\bin\\ARIAL.TTF");
+            Font font = new Font(fontPath);
             return new TextLabel(new Text(text, font));
         }
 
