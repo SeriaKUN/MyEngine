@@ -33,11 +33,11 @@ namespace MyEngine.Render
             this.toRender = toRender;
         }
 
-        public MyEngineSprite(MyEngineSprite agarioSprite)
+        public MyEngineSprite(MyEngineSprite myEngineSprite)
         {
-            sprite = new Sprite(agarioSprite.sprite);
-            position = agarioSprite.position;
-            toRender = agarioSprite.toRender;
+            sprite = new Sprite(myEngineSprite.sprite);
+            position = myEngineSprite.position;
+            toRender = myEngineSprite.toRender;
         }
 
         public MyEngineSprite()
