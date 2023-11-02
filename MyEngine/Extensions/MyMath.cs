@@ -6,13 +6,7 @@ namespace MyEngine.Extensions
     public static class MyMath
     {
         public static float Distance(this Vector2f firstVector, Vector2f secondVector)
-        {
-            float differenceX = firstVector.X - secondVector.X;
-            float differenceY = firstVector.Y - secondVector.Y;
-
-            float distanceToOtherPosition = (float)Math.Sqrt((differenceX * differenceX) + (differenceY * differenceY));
-            return distanceToOtherPosition;
-        }
+            => (float)Math.Sqrt(DistanceSquared(firstVector, secondVector));
 
         public static float DistanceSquared(this Vector2f firstVector, Vector2f secondVector)
         {
@@ -21,6 +15,18 @@ namespace MyEngine.Extensions
 
             float result = (differenceX * differenceX) + (differenceY * differenceY);
             return result;
+        }
+
+        public static float GetLengthSquared(this Vector2f vector)
+            => (vector.X * vector.X) + (vector.Y * vector.Y);
+
+        public static float GetLength(this Vector2f vector)
+            => (float)Math.Sqrt(GetLengthSquared(vector));
+
+        public static Vector2f Normal(this Vector2f vector)
+        {
+            float vectorLength = vector.GetLength();
+            return new Vector2f(vector.X / vectorLength, vector.Y / vectorLength);
         }
 
         public static Vector2f CalculateVector(float length, float angle)

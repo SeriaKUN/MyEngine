@@ -35,6 +35,5 @@ namespace MyEngine.Objects.GameObjects
                 component.Render();
         }
 
-
     }
 }
